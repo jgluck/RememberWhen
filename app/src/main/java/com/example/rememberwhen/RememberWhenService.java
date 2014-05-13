@@ -2,14 +2,14 @@ package com.example.rememberwhen;
 
 
 
-import com.google.android.glass.timeline.LiveCard;
-import com.google.android.glass.timeline.LiveCard.PublishMode;
-
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.widget.RemoteViews;
+
+import com.google.android.glass.timeline.LiveCard;
+import com.google.android.glass.timeline.LiveCard.PublishMode;
 
 public class RememberWhenService extends Service{
 	 private static final String LIVE_CARD_TAG = "RememberWhen";
@@ -26,6 +26,9 @@ public class RememberWhenService extends Service{
 	    
 	    @Override
 	    public int onStartCommand(Intent intent, int flags, int startId) {
+            Intent cameraIntent = new Intent(this, RememberCameraActivity.class);
+	        cameraIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
 	        if (mLiveCard == null) {
 	            mLiveCard = new LiveCard(this, LIVE_CARD_TAG);
 
@@ -37,23 +40,16 @@ public class RememberWhenService extends Service{
 	            mLiveCard.setViews(views);
 	            
 	            Intent menuIntent = new Intent(this, RememberWhenMenu.class);
-//	            Intent cameraIntent = new Intent(this, RememberCameraActivity.class);
-//	            cameraIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//	            startActivity(cameraIntent);
+
 	            menuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	            mLiveCard.setAction(PendingIntent.getActivity(this, 0, menuIntent, 0));
 //	            mLiveCard.setAction(PendingIntent.getActivity(this, 0, cameraIntent, 0));
 	            mLiveCard.attach(this);
 	            mLiveCard.publish(PublishMode.REVEAL);
 	        } else {
-	            Intent cameraIntent = new Intent(this, RememberCameraActivity.class);
-	            cameraIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-	            startActivity(cameraIntent);
 	            mLiveCard.navigate();
-//	            Intent cameraIntent = new Intent(this, RememberCameraActivity.class);
-//	            cameraIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//	            startActivity(cameraIntent);
 	        }
+            startActivity(cameraIntent);
 
 	        return START_STICKY;
 	    }

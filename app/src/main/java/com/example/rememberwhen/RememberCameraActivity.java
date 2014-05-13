@@ -1,28 +1,26 @@
 package com.example.rememberwhen;
 
-import java.io.File;
-import java.util.ArrayList;
-
-import com.google.android.glass.media.CameraManager;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.FileObserver;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.ImageView;
+
+import com.google.android.glass.media.CameraManager;
+
+import java.io.File;
 
 public class RememberCameraActivity extends Activity{
 
 
 	private int TAKE_PICTURE_REQUEST = 101;
-	SharedPreferences prefs; 
+	SharedPreferences prefs;
+
 	
 	private void getPicNum(){
 		String picKey = "com.example.rememberwhen.picrequest";
