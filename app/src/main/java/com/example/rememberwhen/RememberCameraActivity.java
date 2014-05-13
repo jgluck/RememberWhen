@@ -9,9 +9,19 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.FileObserver;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.google.android.glass.media.CameraManager;
+//import org.apache.http.client.methods.*;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import java.util.*;
 
 import java.io.File;
 
@@ -111,10 +121,47 @@ public class RememberCameraActivity extends Activity{
 	    super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	private void processPictureWhenReady(final String picturePath) {
+    public void postData() {
+        HashMap<String, String> data = new HashMap<String, String>();
+        data.put("operation", "insertItem");
+        data.put("message", "AndDev is Cool!");
+        //data.put("imageUrl", "/static/images/chipotle-tube-640x360.jpg");
+        //data.put("contentType", "image/jpeg");
+
+        AsyncHttpPost asyncHttpPost = new AsyncHttpPost(data);
+        asyncHttpPost.execute("https://remember-when1.appspot.com/");
+        /*
+        // Create a new HttpClient and Post Header
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost("http://duruofei.com/ThermalGrid/?add=11101101011010100101101011011110101");
+
+        try {
+            // Add your data
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+            nameValuePairs.add(new BasicNameValuePair("operation", "insertItem"));
+            //nameValuePairs.add(new BasicNameValuePair("message", "AndDev is Cool!"));
+            //nameValuePairs.add(new BasicNameValuePair("imageUrl", "/static/images/chipotle-tube-640x360.jpg"));
+            //nameValuePairs.add(new BasicNameValuePair("contentType", "image/jpeg"));
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+            // Execute HTTP Post Request
+            HttpResponse response = httpclient.execute(httppost);
+            Log.w("myApp", "success");
+        } catch (Exception e) {
+            Log.w("myApp", "fail"+e);
+            // TODO Auto-generated catch block
+        }*/
+    }
+
+
+    private void processPictureWhenReady(final String picturePath) {
 	    final File pictureFile = new File(picturePath);
 
 	    if (pictureFile.exists()) {
+            //Insert here
+            postData();
+
+
 	    	loadPic(pictureFile);
 	        //finish();
 	    } else {
