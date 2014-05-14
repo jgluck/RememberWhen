@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.FileObserver;
 import android.provider.MediaStore;
@@ -66,6 +65,19 @@ public class RememberCameraActivity extends Activity{
     	    //myImage.setImageBitmap(Bitmap.createScaledBitmap(myBitmap,2040, 2040, false));
     	    //myImage.setImageBitmap(myBitmap);
     	}
+    }
+
+    protected void loadPic(Bitmap b){
+
+            Bitmap myBitmap = b;
+            ImageView myImage = (ImageView) findViewById(R.id.photoResult);
+            TextView myText = (TextView) findViewById(R.id.photo_view_loading_text);
+            myText.setVisibility(View.INVISIBLE);
+//    	    Drawable d = Drawable.createFromPath(f.getAbsolutePath());
+            myImage.setImageBitmap(myBitmap);
+            //myImage.setImageBitmap(Bitmap.createScaledBitmap(myBitmap,2040, 2040, false));
+            //myImage.setImageBitmap(myBitmap);
+        
     }
 
 

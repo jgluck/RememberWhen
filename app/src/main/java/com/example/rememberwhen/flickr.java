@@ -79,29 +79,9 @@ public class flickr extends AsyncTask<String, String, String> {
 
     //https://www.flickr.com/services/api/misc.urls.html
     public static void get_photo(String farmid, String serverid,String id,String secret,String local_save) {
-        Image flickrImage = null;
-        String surl = "http://farm" + farmid + ".staticflickr.com/" + serverid + "/" + id + "_" + secret + ".jpg";
-        try {
-            InputStream URLcontent = (InputStream) new URL(surl).getContent();
-            Drawable image = Drawable.createFromStream(URLcontent, "your source link");
-            //URL url = new URL(surl);
-            //Bitmap tgtImg = BitmapFactory.decodeFile("ImageD2.jpg");
-            //image = ImageIO.read(url);
-        }
-        catch (Exception e){
-            Log.w("flickr",e);
-        }
-        //imgRequest = urllib2.Request("http://farm" + farmid + ".staticflickr.com/" + serverid + "/" + id + "_" + secret + ".jpg");
-        //imgData = urllib2.urlopen(imgRequest).read();
-
-        //save a photo
-        //save_photo_to_file(imgData, 'picture_out.jpg');
+        String url = "http://farm" + farmid + ".staticflickr.com/" + serverid + "/" + id + "_" + secret + ".jpg";
+        Bitmap flickrImage = ImageHandler.LoadPicFromURL(url);
     }
-    /*
-    public static void save_photo_to_file(Image imgData, String file_name) {
-        //with open (file_name, 'wb')as f:
-        //f.write(imgData)
-    }*/
 
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
