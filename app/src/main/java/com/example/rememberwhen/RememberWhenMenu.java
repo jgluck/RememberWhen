@@ -1,20 +1,11 @@
 package com.example.rememberwhen;
 
-import com.google.android.glass.touchpad.GestureDetector;
-
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 
 public class RememberWhenMenu extends Activity {
 	private final Handler mHandler = new Handler();
@@ -50,6 +41,8 @@ public class RememberWhenMenu extends Activity {
                 return true;
             case R.id.Dowse:
             	startActivity(new Intent(this, RememberCameraActivity.class));
+            case R.id.gps_debug:
+                startActivity(new Intent(this, GPSDebugActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }

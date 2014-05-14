@@ -20,18 +20,20 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:id="@+id/photoContainer">
-    <TextView
-        android:id="@+id/cameralabel"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginTop="-10px"
-        android:textSize="160px"
-        android:gravity="center" />
 
     <ImageView
         android:id="@+id/photoResult"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="268dp"
+        android:layout_height="121dp"
+        android:layout_gravity="left|bottom" />
+
+    <TextView
+        android:id="@+id/cameralabel"
+        android:layout_width="144dp"
+        android:layout_height="63dp"
+        android:layout_gravity="right|top"
+        android:layout_marginTop="-10px"
+        android:textSize="160px"
+        android:gravity="center" />
 
 </FrameLayout>
