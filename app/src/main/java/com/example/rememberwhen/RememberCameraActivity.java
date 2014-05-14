@@ -159,7 +159,14 @@ public class RememberCameraActivity extends Activity{
 
 	    if (pictureFile.exists()) {
             //Insert here
-            postData();
+            //postData();
+            HashMap<String, String> data = new HashMap<String, String>();
+            //AsyncHttpPost asyncHttpPost = new AsyncHttpPost(data);
+            //asyncHttpPost.execute("https://remember-when1.appspot.com/");
+
+            data.put("geo", "lat,lon");
+            flickr f = new flickr(data);
+            f.execute("");
 
 
 	    	loadPic(pictureFile);
