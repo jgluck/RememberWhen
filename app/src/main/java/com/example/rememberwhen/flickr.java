@@ -15,8 +15,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 
-import java.lang.Runnable.*;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,11 +35,13 @@ public class flickr extends AsyncTask<String, String, String> {
         activity=act;
         lat = data.get("lat");
         lon = data.get("lon");
+        Log.w("flickr lat",lat);
+        Log.w("flickr lon",lon);
     }
 
-    public static String api_key = "b79c787dc2f9f079cca1dbc2746e83c8";
-    public static String auth_token = "72157644715092963-c0f4d9bc18234bed";
-    public static String api_sig = "0e22971829a32eda73aaa08ab36384a8";
+    public static String api_key = "ae589ded39380ca60a95dda1a221d9bd";
+    //public static String auth_token = "72157644715092963-c0f4d9bc18234bed";
+    //public static String api_sig = "0e22971829a32eda73aaa08ab36384a8";
     public static String lat = "38.992130";
     public static String lon = "-76.942914";
     public static String radius = "1";
@@ -49,14 +49,15 @@ public class flickr extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        if(lat==""||lon.equals("")) {
+        if(!lat.equals("")||!lon.equals("")) {
             JSONObject data = get_geo_photos();
             if (data == null)
                 return "failed to get photo list";
             Log.w("flickr", data.toString());
             try {
                 //getAllPhotos((JSONArray)((JSONObject) data.get("photos")).get("photo"));
-                flickrImage = get_photo((JSONObject) ((JSONArray) ((JSONObject) data.get("photos")).get("photo")).get(1));
+                if(!data.get("stat").toString().equals("fail"))
+                    flickrImage = get_photo((JSONObject) ((JSONArray) ((JSONObject) data.get("photos")).get("photo")).get(1));
                 //Log.w("flickr", data.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -80,9 +81,9 @@ public class flickr extends AsyncTask<String, String, String> {
                 "&per_page="+results_per_page+
                 "&page=1"+
                 "&format=json"+
-                "&nojsoncallback=1"+
-                "&auth_token="+auth_token+
-                "&api_sig="+api_sig;
+                "&nojsoncallback=1";
+                //"&auth_token="+auth_token+
+                //"&api_sig="+api_sig;
         Log.w("flickr",url);
         JSONObject json = null;
         try {
@@ -114,6 +115,7 @@ public class flickr extends AsyncTask<String, String, String> {
         try {
             url = "http://farm" + data.get("farm") + ".staticflickr.com/"
                     + data.get("server") + "/" + data.get("id") + "_" + data.get("secret") + ".jpg";
+            Log.w("flickr",url);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -122,7 +124,7 @@ public class flickr extends AsyncTask<String, String, String> {
 
     //https://www.flickr.com/services/api/misc.urls.html
     public static Bitmap get_photo(String farmid, String serverid,String id,String secret,String local_save) {
-        String url = "http://farm" + farmid + ".staticflickr.com/" + serverid + "/" + id + "_" + secret + ".jpg";
+        String url = "http://farm" + farmid + ".staticflickr.com/" + serverid + "/" + id + "_" + secret + ".jpg_m";
         return ImageHandler.LoadPicFromURL(url);
     }
 
