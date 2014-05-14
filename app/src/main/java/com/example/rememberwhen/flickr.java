@@ -1,9 +1,17 @@
 package com.example.rememberwhen;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -68,15 +76,28 @@ public class flickr extends AsyncTask<String, String, String> {
         System.out.println(json.toString());
         return json.toString();
     }
-    /*
+
     //https://www.flickr.com/services/api/misc.urls.html
     public static void get_photo(String farmid, String serverid,String id,String secret,String local_save) {
+        Image flickrImage = null;
+        String surl = "http://farm" + farmid + ".staticflickr.com/" + serverid + "/" + id + "_" + secret + ".jpg";
+        try {
+            InputStream URLcontent = (InputStream) new URL(surl).getContent();
+            Drawable image = Drawable.createFromStream(URLcontent, "your source link");
+            //URL url = new URL(surl);
+            //Bitmap tgtImg = BitmapFactory.decodeFile("ImageD2.jpg");
+            //image = ImageIO.read(url);
+        }
+        catch (Exception e){
+            Log.w("flickr",e);
+        }
         //imgRequest = urllib2.Request("http://farm" + farmid + ".staticflickr.com/" + serverid + "/" + id + "_" + secret + ".jpg");
         //imgData = urllib2.urlopen(imgRequest).read();
 
         //save a photo
         //save_photo_to_file(imgData, 'picture_out.jpg');
     }
+    /*
     public static void save_photo_to_file(Image imgData, String file_name) {
         //with open (file_name, 'wb')as f:
         //f.write(imgData)
