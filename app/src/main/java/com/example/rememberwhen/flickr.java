@@ -26,15 +26,13 @@ public class flickr extends AsyncTask<String, String, String> {
         mData = data;
     }
 
-    public static String api_key = "b1ee1cd097d3e51136032e42982bb13c";
-    public static String auth_token = "72157644256983320-2d75ec48e3c96572";
-    public static String api_sig = "57ef74788a71651189054afdc7e36a0e";
+    public static String api_key = "b79c787dc2f9f079cca1dbc2746e83c8";
+    public static String auth_token = "72157644715092963-c0f4d9bc18234bed";
+    public static String api_sig = "0e22971829a32eda73aaa08ab36384a8";
     public static String lat = "38.992130";
     public static String lon = "-76.942914";
     public static String radius = "1";
     public static String results_per_page="5";
-
-
 
     @Override
     protected String doInBackground(String... params) {
@@ -52,12 +50,13 @@ public class flickr extends AsyncTask<String, String, String> {
                 "&lat=" + lat +
                 "&lon=" + lon +
                 "&radius=" + radius +
-                "&per_page=5"+
-                "&page="+results_per_page+
+                "&per_page="+results_per_page+
+                "&page=1"+
                 "&format=json"+
                 "&nojsoncallback=1"+
                 "&auth_token="+auth_token+
                 "&api_sig="+api_sig;
+        Log.w("flickr",url);
         JSONObject json = null;
         try {
             json = readJsonFromUrl(url);
