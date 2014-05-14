@@ -6,68 +6,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.FileObserver;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.android.glass.media.CameraManager;
 
 import java.io.File;
-import java.util.List;
 
 public class RememberCameraActivity extends Activity{
 
 
-
 	private int TAKE_PICTURE_REQUEST = 101;
 	SharedPreferences prefs;
-    remember_camera_layout theLayout;
 
-
-    public static Location getLastLocation(Context context) {
-        Location result = null;
-        LocationManager locationManager;
-        Criteria locationCriteria;
-        List<String> providers;
-
-        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        locationCriteria = new Criteria();
-        locationCriteria.setAccuracy(Criteria.NO_REQUIREMENT);
-        providers = locationManager.getProviders(locationCriteria, true);
-
-        Log.w("Jon Message: ", "about to iterate through providers, there are: "+providers.size());
-
-
-        // Note that providers = locatoinManager.getAllProviders(); is not used because the
-        // list might contain disabled providers or providers that are not allowed to be called.
-
-        //Note that getAccuracy can return 0, indicating that there is no known accuracy.
-
-        for (String provider : providers) {
-            Log.w("Jon Message: ", "Provider is " + provider);
-            Location location = locationManager.getLastKnownLocation(provider);
-            if (result == null) {
-                result = location;
-            }
-            else if (result.getAccuracy() == 0.0) {
-                if (location.getAccuracy() != 0.0) {
-                    result = location;
-                    break;
-                } else {
-                    if (result.getAccuracy() > location.getAccuracy()) {
-                        result = location;
-                    }
-                }
-            }
-        }
-        return result;
-    }
 	
 	private void getPicNum(){
 		String picKey = "com.example.rememberwhen.picrequest";
@@ -120,19 +73,7 @@ public class RememberCameraActivity extends Activity{
 
        return inSampleSize;
     }
-
-    protected void loadLocation(){
-        TextView myText = (TextView) findViewById(R.id.cameralabel);
-        Location ourLocation =  getLastLocation(this);
-        Log.w(this.getPackageName(), String.format("Location was not null: %b", (ourLocation != null)));
-        if(ourLocation != null){
-            String lat = Double.toString(ourLocation.getLatitude());
-            String lon = Double.toString(ourLocation.getLongitude());
-            String total = lat + " " + lon;
-            Log.w(this.getPackageName(), total);
-            myText.setText(total);
-        }
-    }
+    
     protected void loadPic(File f){
     	if(f.exists()){
 
@@ -174,7 +115,6 @@ public class RememberCameraActivity extends Activity{
 	    final File pictureFile = new File(picturePath);
 
 	    if (pictureFile.exists()) {
-            loadLocation();
 	    	loadPic(pictureFile);
 	        //finish();
 	    } else {
