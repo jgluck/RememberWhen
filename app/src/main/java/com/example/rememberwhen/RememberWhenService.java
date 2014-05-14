@@ -32,12 +32,10 @@ public class RememberWhenService extends Service{
 	        if (mLiveCard == null) {
 	            mLiveCard = new LiveCard(this, LIVE_CARD_TAG);
 
-	            // Keep track of the callback to remove it before unpublishing.
-	            //mCallback = new ChronometerDrawer(this);
-	            //mLiveCard.setDirectRenderingEnabled(true).getSurfaceHolder().addCallback(mCallback);
 	            RemoteViews views = new RemoteViews(this.getPackageName(),
 	                    R.layout.remember_camera_layout);
 	            mLiveCard.setViews(views);
+
 	            
 	            Intent menuIntent = new Intent(this, RememberWhenMenu.class);
 

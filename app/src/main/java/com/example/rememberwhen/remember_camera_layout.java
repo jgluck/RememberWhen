@@ -1,6 +1,7 @@
 package com.example.rememberwhen;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
@@ -11,7 +12,7 @@ import android.widget.ImageView;
  */
 public class remember_camera_layout extends FrameLayout {
 
-    private final ImageView myImage;
+    private ImageView myImage;
 
     public remember_camera_layout(Context context) {
         this(context, null, 0);
@@ -27,6 +28,14 @@ public class remember_camera_layout extends FrameLayout {
 
         myImage = (ImageView) findViewById(R.id.photoResult);
 
+
     }
 
+    public void do_image_alpha(){
+        myImage.setImageAlpha(5);
+    }
+
+    public void add_image(Bitmap x){
+
+    }
 }

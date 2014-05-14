@@ -22,13 +22,15 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int Dowse=0x7f0b0005;
-        public static final int action_settings=0x7f0b0004;
-        public static final int cameralabel=0x7f0b0002;
+        public static final int Dowse=0x7f0b0006;
+        public static final int action_settings=0x7f0b0005;
+        public static final int cameralabel=0x7f0b0004;
         public static final int container=0x7f0b0000;
-        public static final int photoContainer=0x7f0b0001;
+        public static final int gps_debug=0x7f0b0007;
+        public static final int gps_text=0x7f0b0001;
+        public static final int photoContainer=0x7f0b0002;
         public static final int photoResult=0x7f0b0003;
-        public static final int stop=0x7f0b0006;
+        public static final int stop=0x7f0b0008;
     }
     public static final class integer {
         public static final int photoreq=0x7f070000;
@@ -36,7 +38,8 @@ public final class R {
     public static final class layout {
         public static final int activity_remember_when=0x7f030000;
         public static final int fragment_remember_when=0x7f030001;
-        public static final int remember_camera_layout=0x7f030002;
+        public static final int gps_debug_layout=0x7f030002;
+        public static final int remember_camera_layout=0x7f030003;
     }
     public static final class menu {
         public static final int remember_when=0x7f0a0000;
