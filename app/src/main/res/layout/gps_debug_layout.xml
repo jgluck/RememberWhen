@@ -7,10 +7,10 @@
     android:weightSum="1">
 
     <TextView
-        android:layout_width="152dp"
+        android:layout_width="229dp"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/gps_text"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.30" />
+        android:textSize="30dp" />
 </LinearLayout>

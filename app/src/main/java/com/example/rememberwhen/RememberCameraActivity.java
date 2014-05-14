@@ -9,11 +9,14 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.FileObserver;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.glass.media.CameraManager;
 
 import java.io.File;
+import java.util.HashMap;
 
 public class RememberCameraActivity extends Activity{
 
@@ -92,6 +95,8 @@ public class RememberCameraActivity extends Activity{
     	    options.inJustDecodeBounds = false;
     	    Bitmap myBitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),options);
     	    ImageView myImage = (ImageView) findViewById(R.id.photoResult);
+            TextView myText = (TextView) findViewById(R.id.photo_view_loading_text);
+            myText.setVisibility(View.INVISIBLE);
 //    	    Drawable d = Drawable.createFromPath(f.getAbsolutePath());
     	    myImage.setImageBitmap(myBitmap);
     	    //myImage.setImageBitmap(Bitmap.createScaledBitmap(myBitmap,2040, 2040, false));

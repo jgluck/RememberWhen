@@ -36,4 +36,14 @@
         android:textSize="160px"
         android:gravity="center" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loading Photo"
+        android:id="@+id/photo_view_loading_text"
+        android:layout_gravity="center"
+        android:textIsSelectable="false"
+        android:textSize="40dp"
+        android:textColor="@color/light_gray" />
+
 </FrameLayout>

@@ -16,4 +16,6 @@
 
 <resources>
     <color name="black">#ff000000</color>
+    <color name="dark_violet">#1b142b</color>
+    <color name="light_gray">#b1afb2</color>
 </resources>

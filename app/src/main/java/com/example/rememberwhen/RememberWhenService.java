@@ -33,7 +33,7 @@ public class RememberWhenService extends Service{
 	            mLiveCard = new LiveCard(this, LIVE_CARD_TAG);
 
 	            RemoteViews views = new RemoteViews(this.getPackageName(),
-	                    R.layout.remember_camera_layout);
+	                    R.layout.remember_when_layout);
 	            mLiveCard.setViews(views);
 
 	            

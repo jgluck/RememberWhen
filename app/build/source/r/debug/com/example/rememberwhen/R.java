@@ -12,25 +12,40 @@ public final class R {
     }
     public static final class color {
         public static final int black=0x7f050000;
+        public static final int dark_violet=0x7f050001;
+        public static final int light_gray=0x7f050002;
     }
     public static final class dimen {
         public static final int activity_horizontal_margin=0x7f060000;
         public static final int activity_vertical_margin=0x7f060001;
+        public static final int glass_card_body_height=0x7f060002;
+        public static final int glass_card_footer_margin=0x7f060003;
+        public static final int glass_card_left_column_width=0x7f060004;
+        public static final int glass_card_margin=0x7f060005;
+        public static final int glass_card_two_column_margin=0x7f060006;
     }
     public static final class drawable {
         public static final int ic_lap=0x7f020000;
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int Dowse=0x7f0b0006;
-        public static final int action_settings=0x7f0b0005;
+        public static final int Dowse=0x7f0b000e;
+        public static final int action_settings=0x7f0b000d;
+        public static final int body_layout=0x7f0b000a;
         public static final int cameralabel=0x7f0b0004;
         public static final int container=0x7f0b0000;
-        public static final int gps_debug=0x7f0b0007;
+        public static final int footer=0x7f0b0008;
+        public static final int footer_container=0x7f0b0007;
+        public static final int gps_debug=0x7f0b000f;
         public static final int gps_text=0x7f0b0001;
+        public static final int layout=0x7f0b0006;
         public static final int photoContainer=0x7f0b0002;
         public static final int photoResult=0x7f0b0003;
-        public static final int stop=0x7f0b0008;
+        public static final int photo_view_loading_text=0x7f0b0005;
+        public static final int stop=0x7f0b0010;
+        public static final int textView=0x7f0b000b;
+        public static final int textView2=0x7f0b000c;
+        public static final int timestamp=0x7f0b0009;
     }
     public static final class integer {
         public static final int photoreq=0x7f070000;
@@ -40,6 +55,7 @@ public final class R {
         public static final int fragment_remember_when=0x7f030001;
         public static final int gps_debug_layout=0x7f030002;
         public static final int remember_camera_layout=0x7f030003;
+        public static final int remember_when_layout=0x7f030004;
     }
     public static final class menu {
         public static final int remember_when=0x7f0a0000;
