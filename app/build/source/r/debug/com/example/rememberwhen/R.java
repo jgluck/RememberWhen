@@ -36,21 +36,22 @@ public final class R {
         public static final int kent3=0x7f020008;
     }
     public static final class id {
-        public static final int Dowse=0x7f0b000e;
+        public static final int Dowse=0x7f0b0010;
         public static final int body_layout=0x7f0b0006;
         public static final int cameralabel=0x7f0b000b;
         public static final int container=0x7f0b0000;
-        public static final int example_cards=0x7f0b0010;
+        public static final int example_cards=0x7f0b0012;
         public static final int footer=0x7f0b0004;
         public static final int footer_container=0x7f0b0003;
-        public static final int gps_debug=0x7f0b000f;
+        public static final int gps_debug=0x7f0b0011;
         public static final int gps_text=0x7f0b0001;
         public static final int layout=0x7f0b0002;
+        public static final int navigate=0x7f0b000e;
         public static final int photoContainer=0x7f0b0009;
         public static final int photoResult=0x7f0b000a;
         public static final int photo_image_view=0x7f0b0007;
         public static final int photo_view_loading_text=0x7f0b000c;
-        public static final int stop=0x7f0b0011;
+        public static final int stop=0x7f0b000f;
         public static final int textView=0x7f0b0008;
         public static final int textView2=0x7f0b000d;
         public static final int timestamp=0x7f0b0005;
@@ -67,15 +68,17 @@ public final class R {
         public static final int remember_when_layout=0x7f030005;
     }
     public static final class menu {
-        public static final int remember_when=0x7f0a0000;
+        public static final int picture_location=0x7f0a0000;
+        public static final int remember_when=0x7f0a0001;
     }
     public static final class string {
         public static final int action_settings=0x7f080000;
         public static final int app_name=0x7f080001;
         public static final int hello_world=0x7f080002;
         public static final int photo_loading=0x7f080003;
-        public static final int remember_when_trigger=0x7f080004;
-        public static final int stop=0x7f080005;
+        public static final int remember_when_prompt=0x7f080004;
+        public static final int remember_when_trigger=0x7f080005;
+        public static final int stop=0x7f080006;
     }
     public static final class style {
         /** 
@@ -90,6 +93,7 @@ public final class R {
         /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f090001;
+        public static final int MenuTheme=0x7f090002;
     }
     public static final class xml {
         public static final int voice_trigger_start=0x7f040000;

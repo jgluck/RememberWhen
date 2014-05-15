@@ -15,4 +15,7 @@
 -->
 
 <!--<trigger command="REMEMBER_WHERE_I_AM" />-->
-    <trigger keyword="@string/remember_when_trigger"/>
+    <trigger keyword="@string/remember_when_trigger">
+        <input prompt="@string/remember_when_prompt"/>
+    </trigger>
+
