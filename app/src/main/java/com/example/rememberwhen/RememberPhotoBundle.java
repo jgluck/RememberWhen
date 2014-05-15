@@ -3,15 +3,19 @@ package com.example.rememberwhen;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.glass.app.Card;
 import com.google.android.glass.widget.CardScrollAdapter;
 import com.google.android.glass.widget.CardScrollView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -49,15 +53,25 @@ public class RememberPhotoBundle extends Activity {
 
 
     private void createCards() {
+        HashMap<String, String> data = new HashMap<String, String>();
+        Location loc = GPSDebugActivity.getLastLocation(this);
+        data.put("lat", loc.getLatitude()+"");
+        data.put("lon",loc.getLongitude()+"");
+        ImageView myImage = (ImageView) findViewById(R.id.photoResult);
+        TextView myText = (TextView) findViewById(R.id.photo_view_loading_text);
+
         mCards = new ArrayList<Card>();
+
+        new flickr(mCards, data, this).execute();
+
+
 
         Card card;
 
         card = new Card(this);
-        card.setText("This card has a footer.");
-        card.setFootnote("I'm the footer!");
+        card.setText("These are your memories");
         mCards.add(card);
-
+/*
         card = new Card(this);
         card.setText("This card has a cute background image.");
         card.setFootnote("How can you resist?");
@@ -72,7 +86,7 @@ public class RememberPhotoBundle extends Activity {
         card.addImage(R.drawable.kent1);
         card.addImage(R.drawable.kent2);
         card.addImage(R.drawable.kent3);
-        mCards.add(card);
+        mCards.add(card);*/
     }
 
     private class ExampleCardScrollAdapter extends CardScrollAdapter {

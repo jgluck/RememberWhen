@@ -2,6 +2,7 @@ package com.example.rememberwhen;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.BitmapRegionDecoder;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -34,13 +35,24 @@ public class flickr extends AsyncTask<String, String, String> {
     private HashMap<String, String> mData = null;// post data
     private ImageView content;
     private TextView contentText;
-    private Activity activity;
-    private static Bitmap flickrImage;
+    private static Activity activity;
+    private static Bitmap [] flickrImage;
+    private static List<Card> bundle;
 
     public flickr(ImageView imv,TextView tv,HashMap<String, String> data, Activity act) {
         mData = data;
         content=imv;
         contentText=tv;
+        activity=act;
+        lat = data.get("lat");
+        lon = data.get("lon");
+        Log.w("flickr lat",lat);
+        Log.w("flickr lon",lon);
+    }
+
+    public flickr(List<Card> mCards,HashMap<String, String> data, Activity act) {
+        mData = data;
+        bundle=mCards;
         activity=act;
         lat = data.get("lat");
         lon = data.get("lon");
@@ -64,9 +76,10 @@ public class flickr extends AsyncTask<String, String, String> {
                 return "failed to get photo list";
             Log.w("flickr", data.toString());
             try {
-                //getAllPhotos((JSONArray)((JSONObject) data.get("photos")).get("photo"));
+
                 if(!data.get("stat").toString().equals("fail"))
-                    flickrImage = get_photo((JSONObject) ((JSONArray) ((JSONObject) data.get("photos")).get("photo")).get(1));
+                    getAllPhotos((JSONArray)((JSONObject) data.get("photos")).get("photo"));
+                    //flickrImage = get_photo((JSONObject) ((JSONArray) ((JSONObject) data.get("photos")).get("photo")).get(1));
                 //Log.w("flickr", data.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -109,10 +122,11 @@ public class flickr extends AsyncTask<String, String, String> {
     }
 
     public static void getAllPhotos(JSONArray metadata){
+        flickrImage = new Bitmap[metadata.length()];
         for(int i=0;i<metadata.length();i++)
             //flickrImage = get_photo("4", "3206", "2929406868", "dc84ae77c0", "test.jpg");
             try {
-                flickrImage = get_photo((JSONObject)metadata.get(i));
+                flickrImage[i] = get_photo((JSONObject)metadata.get(i));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -163,23 +177,25 @@ public class flickr extends AsyncTask<String, String, String> {
      */
     @Override
     protected void onPostExecute(String result) {
-        contentText.setVisibility(View.INVISIBLE);
-        content.setImageBitmap(flickrImage);
+        //contentText.setVisibility(View.INVISIBLE);
+        //content.setImageBitmap(flickrImage);
+        createCards();
     }
 
-    public static void createCards(List<Bitmap> bitmaps){
-        List<Card> mCards = new ArrayList<Card>();
-
+    public static void createCards(){
+        for (int i=0;i<flickrImage.length;i++){
+            createCard(flickrImage[i]);
+        }
     }
 
-    /*public static void createCard(Bitmap b){
+    public static void createCard(Bitmap b){
         Card card;
-        card = new Card(this);
+        card = new Card(activity);
         card.setText("Test");
         card.setFootnote("Aren't they precious?");
-        card.setImageLayout(Card.ImageLayout.LEFT);
+        card.setImageLayout(Card.ImageLayout.FULL);
         card.addImage(b);
-        mCards.add(card);
-    }*/
+        bundle.add(card);
+    }
 
 }
