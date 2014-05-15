@@ -8,6 +8,7 @@ import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.rememberwhen.OAuth.FlickrHelper;
 import com.example.rememberwhen.OAuth.FlickrjAndroidSampleActivity;
+import com.example.rememberwhen.RememberCameraActivity;
 import com.googlecode.flickrjandroid.Flickr;
 import com.googlecode.flickrjandroid.auth.Permission;
 import com.googlecode.flickrjandroid.oauth.OAuthToken;
@@ -99,7 +101,7 @@ public class OAuthTask extends AsyncTask<Void, Integer, String> {
 	 */
 	private void saveTokenSecrent(String tokenSecret) {
 		logger.debug("request token: " + tokenSecret); //$NON-NLS-1$
-		FlickrjAndroidSampleActivity act = (FlickrjAndroidSampleActivity) mContext;
+		RememberCameraActivity act = (RememberCameraActivity) mContext;
 		act.saveOAuthToken(null, null, null, tokenSecret);
 		logger.debug("oauth token secret saved: {}", tokenSecret); //$NON-NLS-1$
 	}

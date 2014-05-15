@@ -10,7 +10,6 @@ import android.app.Activity;
 import android.os.AsyncTask;
 
 import com.example.rememberwhen.OAuth.FlickrHelper;
-import com.example.rememberwhen.OAuth.FlickrjAndroidSampleActivity;
 import com.example.rememberwhen.RememberCameraActivity;
 import com.googlecode.flickrjandroid.Flickr;
 import com.googlecode.flickrjandroid.oauth.OAuth;
