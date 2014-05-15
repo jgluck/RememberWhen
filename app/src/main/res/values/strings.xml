@@ -6,5 +6,6 @@
     <string name="action_settings">Settings</string>
     <string name="stop">stop</string>
     <string name="remember_when_trigger">Remember When</string>
+    <string name="photo_loading">Loading Photo</string>
 
 </resources>

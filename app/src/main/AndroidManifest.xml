@@ -36,6 +36,10 @@
             android:enabled="true" >
         </activity>
 
+        <activity
+            android:name="com.example.rememberwhen.RememberPhotoBundle"
+            android:enabled="true" >
+        </activity>
 
         <service
             android:name="com.example.rememberwhen.RememberWhenService"

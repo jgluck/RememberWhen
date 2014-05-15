@@ -43,6 +43,8 @@ public class RememberWhenMenu extends Activity {
             	startActivity(new Intent(this, RememberCameraActivity.class));
             case R.id.gps_debug:
                 startActivity(new Intent(this, GPSDebugActivity.class));
+            case R.id.example_cards:
+                startActivity(new Intent(this, RememberPhotoBundle.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
