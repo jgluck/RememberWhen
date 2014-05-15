@@ -40,7 +40,7 @@ public final class R {
         public static final int body_layout=0x7f0b0006;
         public static final int cameralabel=0x7f0b000b;
         public static final int container=0x7f0b0000;
-        public static final int example_cards=0x7f0b0011;
+        public static final int example_cards=0x7f0b0010;
         public static final int footer=0x7f0b0004;
         public static final int footer_container=0x7f0b0003;
         public static final int gps_debug=0x7f0b000f;
@@ -50,7 +50,7 @@ public final class R {
         public static final int photoResult=0x7f0b000a;
         public static final int photo_image_view=0x7f0b0007;
         public static final int photo_view_loading_text=0x7f0b000c;
-        public static final int stop=0x7f0b0010;
+        public static final int stop=0x7f0b0011;
         public static final int textView=0x7f0b0008;
         public static final int textView2=0x7f0b000d;
         public static final int timestamp=0x7f0b0005;

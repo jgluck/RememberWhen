@@ -26,8 +26,8 @@ public class RememberWhenService extends Service{
 	    
 	    @Override
 	    public int onStartCommand(Intent intent, int flags, int startId) {
-            Intent cameraIntent = new Intent(this, RememberCameraActivity.class);
-	        cameraIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Intent sudden_intent = new Intent(this, RememberPhotoBundle.class);
+	        sudden_intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
 	        if (mLiveCard == null) {
 	            mLiveCard = new LiveCard(this, LIVE_CARD_TAG);
@@ -41,13 +41,12 @@ public class RememberWhenService extends Service{
 
 	            menuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	            mLiveCard.setAction(PendingIntent.getActivity(this, 0, menuIntent, 0));
-//	            mLiveCard.setAction(PendingIntent.getActivity(this, 0, cameraIntent, 0));
 	            mLiveCard.attach(this);
 	            mLiveCard.publish(PublishMode.REVEAL);
 	        } else {
 	            mLiveCard.navigate();
 	        }
-            startActivity(cameraIntent);
+            startActivity(sudden_intent);
 
 	        return START_STICKY;
 	    }
