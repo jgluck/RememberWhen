@@ -4,7 +4,7 @@
     
     <item android:id="@+id/Dowse" android:title="dowse memory" android:icon="@drawable/ic_remember"></item>
     <item android:id="@+id/gps_debug" android:title="debug gps" android:icon="@drawable/ic_gps"></item>
-    <item android:id="@+id/stop" android:title="stop" android:icon="@drawable/ic_stop"></item>
     <item android:id="@+id/example_cards" android:title="card scroll" android:icon="@drawable/ic_cards"></item>
+    <item android:id="@+id/stop" android:title="stop" android:icon="@drawable/ic_stop"></item>
 
 </menu>
