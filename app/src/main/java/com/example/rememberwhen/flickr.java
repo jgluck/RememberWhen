@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.glass.app.Card;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +17,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -162,5 +166,20 @@ public class flickr extends AsyncTask<String, String, String> {
         contentText.setVisibility(View.INVISIBLE);
         content.setImageBitmap(flickrImage);
     }
+
+    public static void createCards(List<Bitmap> bitmaps){
+        List<Card> mCards = new ArrayList<Card>();
+
+    }
+
+    /*public static void createCard(Bitmap b){
+        Card card;
+        card = new Card(this);
+        card.setText("Test");
+        card.setFootnote("Aren't they precious?");
+        card.setImageLayout(Card.ImageLayout.LEFT);
+        card.addImage(b);
+        mCards.add(card);
+    }*/
 
 }
