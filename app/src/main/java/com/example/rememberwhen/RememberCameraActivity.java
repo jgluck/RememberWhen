@@ -84,16 +84,26 @@ public class RememberCameraActivity extends Activity{
 	    if (requestCode == TAKE_PICTURE_REQUEST && resultCode == RESULT_OK) {
 	        String picturePath = data.getStringExtra(
 	                CameraManager.EXTRA_PICTURE_FILE_PATH);
-	        processPictureWhenReady(picturePath);
-	    }
+            String thumbnailPath = data.getStringExtra(CameraManager.EXTRA_THUMBNAIL_FILE_PATH);
+	        processPictureWhenReady(picturePath, thumbnailPath);
+            super.onActivityResult(requestCode, resultCode, data);
+	    }else{
+            super.onActivityResult(requestCode, resultCode, data);
+            finish();
+        }
 
-	    super.onActivityResult(requestCode, resultCode, data);
+//	    super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	private void processPictureWhenReady(final String picturePath) {
+	private void processPictureWhenReady(final String picturePath, final String thumbnailPath) {
 	    final File pictureFile = new File(picturePath);
+        final File pictureThumbnail = new File(thumbnailPath);
 
-	    if (pictureFile.exists()) {
+        if(pictureThumbnail.exists()){
+            loadPic(pictureThumbnail);
+        }
+
+        if (pictureFile.exists()) {
 
             //Insert here
             HashMap<String, String> data = new HashMap<String, String>();
@@ -103,8 +113,6 @@ public class RememberCameraActivity extends Activity{
             ImageView myImage = (ImageView) findViewById(R.id.photoResult);
             TextView myText = (TextView) findViewById(R.id.photo_view_loading_text);
 
-            new flickr(myImage,myText,data, this).execute();
-            //Bitmap myBitmap = f.execute("");
 
 	        //finish();
 	    } else {
@@ -136,7 +144,7 @@ public class RememberCameraActivity extends Activity{
 	                        runOnUiThread(new Runnable() {
 	                            @Override
 	                            public void run() {
-	                                processPictureWhenReady(picturePath);
+	                                processPictureWhenReady(picturePath,thumbnailPath);
 	                            }
 	                        });
 	                    }

@@ -128,6 +128,7 @@ public class RememberPhotoBundle extends Activity {
                             ViewGroup parent) {
             return  mCards.get(position).getView(convertView, parent);
         }
+
     }
 
 }
