@@ -6,10 +6,12 @@ package com.example.rememberwhen.OAuth.tasks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 
 import com.example.rememberwhen.OAuth.FlickrHelper;
 import com.example.rememberwhen.OAuth.FlickrjAndroidSampleActivity;
+import com.example.rememberwhen.RememberCameraActivity;
 import com.googlecode.flickrjandroid.Flickr;
 import com.googlecode.flickrjandroid.oauth.OAuth;
 import com.googlecode.flickrjandroid.oauth.OAuthInterface;
@@ -21,9 +23,9 @@ import com.googlecode.flickrjandroid.oauth.OAuthInterface;
 public class GetOAuthTokenTask extends AsyncTask<String, Integer, OAuth> {
 	private static final Logger logger = LoggerFactory.getLogger(GetOAuthTokenTask.class);
 
-	private FlickrjAndroidSampleActivity activity;
+	private Activity activity;
 
-	public GetOAuthTokenTask(FlickrjAndroidSampleActivity context) {
+	public GetOAuthTokenTask(Activity context) {
 		this.activity = context;
 	}
 
@@ -48,7 +50,7 @@ public class GetOAuthTokenTask extends AsyncTask<String, Integer, OAuth> {
 	@Override
 	protected void onPostExecute(OAuth result) {
 		if (activity != null) {
-			activity.onOAuthDone(result);
+            ((RememberCameraActivity)activity).onOAuthDone(result);
 		}
 	}
 

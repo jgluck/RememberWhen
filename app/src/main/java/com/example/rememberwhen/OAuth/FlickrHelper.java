@@ -13,8 +13,8 @@ import javax.xml.parsers.ParserConfigurationException;
 public final class FlickrHelper {
 
 	private static FlickrHelper instance = null;
-	private static final String API_KEY = "da4fadd0084ea1799ad33048f0d6a5c5"; //$NON-NLS-1$
-	public static final String API_SEC = "186b04791439c326"; //$NON-NLS-1$
+	private static final String API_KEY = "ae589ded39380ca60a95dda1a221d9bd"; //$NON-NLS-1$
+	public static final String API_SEC = "26c0b2367c8b0f33"; //$NON-NLS-1$
 
 	private FlickrHelper() {
 
