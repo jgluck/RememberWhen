@@ -74,10 +74,7 @@ public class RememberCameraActivity extends Activity{
             ImageView myImage = (ImageView) findViewById(R.id.photoResult);
             TextView myText = (TextView) findViewById(R.id.photo_view_loading_text);
             myText.setVisibility(View.INVISIBLE);
-//    	    Drawable d = Drawable.createFromPath(f.getAbsolutePath());
             myImage.setImageBitmap(myBitmap);
-            //myImage.setImageBitmap(Bitmap.createScaledBitmap(myBitmap,2040, 2040, false));
-            //myImage.setImageBitmap(myBitmap);
 
     }
 
@@ -104,7 +101,9 @@ public class RememberCameraActivity extends Activity{
             data.put("lat", loc.getLatitude()+"");
             data.put("lon",loc.getLongitude()+"");
             ImageView myImage = (ImageView) findViewById(R.id.photoResult);
-            new flickr(myImage,data, this).execute();
+            TextView myText = (TextView) findViewById(R.id.photo_view_loading_text);
+
+            new flickr(myImage,myText,data, this).execute();
             //Bitmap myBitmap = f.execute("");
 
 	        //finish();

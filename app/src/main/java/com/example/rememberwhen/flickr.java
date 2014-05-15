@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +20,7 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 /**
  * Created by kentwills on 5/13/14.
@@ -26,12 +29,14 @@ public class flickr extends AsyncTask<String, String, String> {
 
     private HashMap<String, String> mData = null;// post data
     private ImageView content;
+    private TextView contentText;
     private Activity activity;
     private static Bitmap flickrImage;
 
-    public flickr(ImageView imv,HashMap<String, String> data, Activity act) {
+    public flickr(ImageView imv,TextView tv,HashMap<String, String> data, Activity act) {
         mData = data;
         content=imv;
+        contentText=tv;
         activity=act;
         lat = data.get("lat");
         lon = data.get("lon");
@@ -154,6 +159,7 @@ public class flickr extends AsyncTask<String, String, String> {
      */
     @Override
     protected void onPostExecute(String result) {
+        contentText.setVisibility(View.INVISIBLE);
         content.setImageBitmap(flickrImage);
     }
 
