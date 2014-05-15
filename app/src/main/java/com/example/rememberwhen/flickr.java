@@ -63,9 +63,9 @@ public class flickr extends AsyncTask<String, String, String> {
     public static String api_key = "ae589ded39380ca60a95dda1a221d9bd";
     //public static String auth_token = "72157644715092963-c0f4d9bc18234bed";
     //public static String api_sig = "0e22971829a32eda73aaa08ab36384a8";
-    public static String lat = "38.992130";
-    public static String lon = "-76.942914";
-    public static String radius = "1";
+    public static String lat;// = "38.992130";
+    public static String lon;// = "-76.942914";
+    public static String radius = ".5";
     public static String results_per_page="5";
 
     @Override
@@ -76,7 +76,6 @@ public class flickr extends AsyncTask<String, String, String> {
                 return "failed to get photo list";
             Log.w("flickr", data.toString());
             try {
-
                 if(!data.get("stat").toString().equals("fail"))
                     getAllPhotos((JSONArray)((JSONObject) data.get("photos")).get("photo"));
                     //flickrImage = get_photo((JSONObject) ((JSONArray) ((JSONObject) data.get("photos")).get("photo")).get(1));
