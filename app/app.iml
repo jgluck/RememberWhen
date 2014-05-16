@@ -73,6 +73,7 @@
     <orderEntry type="library" exported="" name="slf4j-api-1.7.7" level="project" />
     <orderEntry type="library" exported="" name="mail" level="project" />
     <orderEntry type="library" exported="" name="flickrj-android-2.0.8" level="project" />
+    <orderEntry type="library" exported="" name="sanselan-0.97-incubator" level="project" />
     <orderEntry type="library" exported="" name="support-v4-19.1.0" level="project" />
     <orderEntry type="library" exported="" name="additionnal" level="project" />
     <orderEntry type="library" exported="" name="activation" level="project" />
