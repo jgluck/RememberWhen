@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.rememberwhen.RememberWhen" >
 
-    <item android:id="@+id/navigate" android:title="Navigate to Memory" android:icon="@drawable/ic_gps"></item>
-    <item android:id="@+id/stop" android:title="stop" android:icon="@drawable/ic_stop"></item>
+    <item android:id="@+id/navigate" android:title="Refresh Memory" android:icon="@drawable/ic_gps"></item>
+    <item android:id="@+id/stop" android:title="Cancel" android:icon="@drawable/ic_stop"></item>
 
 </menu>
