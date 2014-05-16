@@ -1,18 +1,16 @@
 package com.example.rememberwhen;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapRegionDecoder;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.glass.app.Card;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,8 +19,14 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 /**
  * Created by kentwills on 5/13/14.
@@ -34,6 +38,7 @@ public class flickr extends AsyncTask<String, String, String> {
     private TextView contentText;
     private static Activity activity;
     private static Bitmap [] flickrImage;
+    private static List<String>locations;
     private static List<Card> bundle;
 
     public flickr(ImageView imv,TextView tv,HashMap<String, String> data, Activity act) {
@@ -51,6 +56,17 @@ public class flickr extends AsyncTask<String, String, String> {
         mData = data;
         bundle=mCards;
         activity=act;
+        lat = data.get("lat");
+        lon = data.get("lon");
+        Log.w("flickr lat",lat);
+        Log.w("flickr lon",lon);
+    }
+
+    public flickr(List<Card> mCards,List<String> loc,HashMap<String, String> data, Activity act) {
+        mData = data;
+        bundle=mCards;
+        activity=act;
+        loc=locations;
         lat = data.get("lat");
         lon = data.get("lon");
         Log.w("flickr lat",lat);
@@ -75,6 +91,8 @@ public class flickr extends AsyncTask<String, String, String> {
             try {
                 if(!data.get("stat").toString().equals("fail"))
                     getAllPhotos((JSONArray)((JSONObject) data.get("photos")).get("photo"));
+                    get_all_geocode((JSONArray)((JSONObject) data.get("photos")).get("photo"));
+                    //get_geocode("2929406868");
                     //flickrImage = get_photo((JSONObject) ((JSONArray) ((JSONObject) data.get("photos")).get("photo")).get(1));
                 //Log.w("flickr", data.toString());
             } catch (JSONException e) {
@@ -87,7 +105,40 @@ public class flickr extends AsyncTask<String, String, String> {
         return "failed to get GPS coordinates";
     }
 
+    public static void get_all_geocode(JSONArray metadata){
+        for(int i=0;i<metadata.length();i++)
+            try {
+                //(JSONObject)metadata.get(i)
+                JSONObject data = (JSONObject)metadata.get(i);
+                locations.add(get_geocode(data.get("id")+""));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+    }
 
+    public static String get_geocode(String photo_id){
+        String url = "https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation"+
+                "&api_key="+ api_key +
+                "&photo_id="+ photo_id+
+                "&format=json&nojsoncallback=1";
+        Log.w("flickr",url);
+        JSONObject json = null;
+        try {
+            json = readJsonFromUrl(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONObject loc = null;
+        try {
+            loc = (JSONObject)((JSONObject)json.get("photo")).get("location");
+            return (Double)loc.get("latitude")+","+(Double)loc.get("longitude");
+        } catch (JSONException e) {
+            Log.w("flickr", e);
+        }
+        return null;
+    }
 
     //https://www.flickr.com/services/api/explore/flickr.photos.search
     public static JSONObject get_geo_photos() {
@@ -111,9 +162,6 @@ public class flickr extends AsyncTask<String, String, String> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //if(!((String)json.get("stat").toString()).equals("ok"))
-        //    return null;
-        //else
             return json;
     }
 
@@ -194,12 +242,6 @@ public class flickr extends AsyncTask<String, String, String> {
         bundle.add(card);
     }
 
-    public static SharedPreferences.Editor putDouble(final SharedPreferences.Editor edit, final String key, final double value) {
-        return edit.putLong(key, Double.doubleToRawLongBits(value));
-    }
 
-    public static double getDouble(final SharedPreferences prefs, final String key, final double defaultValue) {
-        return Double.longBitsToDouble(prefs.getLong(key, Double.doubleToLongBits(defaultValue)));
-    }
 
 }
