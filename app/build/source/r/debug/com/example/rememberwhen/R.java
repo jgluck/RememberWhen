@@ -97,6 +97,7 @@ public final class R {
         public static final int MenuTheme=0x7f090002;
     }
     public static final class xml {
-        public static final int voice_trigger_start=0x7f040000;
+        public static final int voice_trigger_snap=0x7f040000;
+        public static final int voice_trigger_start=0x7f040001;
     }
 }
