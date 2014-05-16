@@ -1,7 +1,9 @@
 package com.example.rememberwhen;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
 import android.view.Menu;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 
 public class PhotoLocMenu extends Activity {
     private final Handler mHandler = new Handler();
+    SharedPreferences prefs;
 
     @Override
     public void onAttachedToWindow() {
@@ -20,6 +23,8 @@ public class PhotoLocMenu extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
+        prefs = this.getSharedPreferences(
+                "com.example.rememberwhen", Context.MODE_PRIVATE);
         inflater.inflate(R.menu.picture_location, menu);
         return true;
     }
@@ -41,8 +46,11 @@ public class PhotoLocMenu extends Activity {
                 });
                 return true;
             case R.id.navigate:
-                Intent navIntent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("google.navigation:ll=37.4219795, - 122.0836669 & title = your memory, mode=w"));
+                Intent navIntent = new Intent(Intent.ACTION_VIEW);
+                String loc = prefs.getString("current_photo_loc","0,0");
+                String lat = loc.split(",")[0];
+                String lon = loc.split(",")[1];
+                navIntent.setData(Uri.parse(String.format("google.navigation:ll=%s,%s&title=memory&mode=w",lat,lon)));
                 startActivity(navIntent);
                 return true;
             default:
