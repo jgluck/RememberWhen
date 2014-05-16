@@ -2,15 +2,16 @@ package com.example.rememberwhen;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.BitmapRegionDecoder;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.glass.app.Card;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,14 +20,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 /**
  * Created by kentwills on 5/13/14.
@@ -66,7 +61,7 @@ public class flickr extends AsyncTask<String, String, String> {
         mData = data;
         bundle=mCards;
         activity=act;
-        loc=locations;
+        locations=loc;
         lat = data.get("lat");
         lon = data.get("lon");
         Log.w("flickr lat",lat);
