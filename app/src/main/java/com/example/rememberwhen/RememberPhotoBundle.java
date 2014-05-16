@@ -59,6 +59,7 @@ public class RememberPhotoBundle extends Activity {
                                     long arg3)
             {
                 pref_editor.putString("current_photo_loc",mCardLocations.get(position));
+                pref_editor.apply();
                 spawnMenu();
             }
         });

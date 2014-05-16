@@ -51,6 +51,7 @@ public class PhotoLocMenu extends Activity {
                 String lat = loc.split(",")[0];
                 String lon = loc.split(",")[1];
                 navIntent.setData(Uri.parse(String.format("google.navigation:ll=%s,%s&title=memory&mode=w",lat,lon)));
+
                 startActivity(navIntent);
                 return true;
             default:
