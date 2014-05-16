@@ -10,7 +10,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.FileObserver;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -40,6 +43,7 @@ public class RememberCameraActivity extends Activity{
     public static final String KEY_TOKEN_SECRET = "flickrj-android-tokenSecret"; //$NON-NLS-1$
     public static final String KEY_USER_NAME = "flickrj-android-userName"; //$NON-NLS-1$
     public static final String KEY_USER_ID = "flickrj-android-userId"; //$NON-NLS-1$
+
 
     private static final Logger logger = LoggerFactory.getLogger(RememberCameraActivity.class);
 
@@ -81,6 +85,7 @@ public class RememberCameraActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         prefs = this.getSharedPreferences(
   		      "com.example.rememberwhen", Context.MODE_PRIVATE);
         setContentView(R.layout.remember_camera_layout);
@@ -146,9 +151,19 @@ public class RememberCameraActivity extends Activity{
             data.put("lon",loc.getLongitude()+"");
             ImageView myImage = (ImageView) findViewById(R.id.photoResult);
             TextView myText = (TextView) findViewById(R.id.photo_view_loading_text);
-            oauthTEST();
+            //oauthTEST();
+            //sendEmail(pictureFile);
+            try {
+                GmailSender sender = new GmailSender("glassUMD@gmail.com", "thisisthehcil");
+                sender.sendMail("This is Subject",
+                        "This is Body",
+                        "glassUMD@gmail.com",
+                        "kentwills@aol.com");
+            } catch (Exception e) {
+                Log.e("SendMail", e.getMessage(), e);
+            }
 
-	        //finish();
+            //finish();
 	    } else {
 	        // The file does not exist yet. Before starting the file observer, you
 	        // can update your UI to let the user know that the application is
@@ -291,6 +306,26 @@ public class RememberCameraActivity extends Activity{
         editor.putString(KEY_USER_NAME, userName);
         editor.putString(KEY_USER_ID, userId);
         editor.commit();
+    }
+
+    private void sendEmail(File pictureFile){
+        Uri uri = Uri.fromFile(pictureFile);
+        Date dt = new Date();
+
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"r.kentwills@yahoo.com", "myself74types@photos.flickr.com"});
+        //i.putExtra(Intent.EXTRA_SUBJECT, "");
+        i.putExtra(Intent.EXTRA_STREAM, uri);
+        try {
+            Log.d("Msg","Trying to send mail");
+            startActivity(Intent.createChooser(i,"pick"));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Log.e("ERR", "Error " + ex.toString());
+            Toast.makeText(RememberCameraActivity.this,
+                    "There are no email clients installed.",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 	
 }
