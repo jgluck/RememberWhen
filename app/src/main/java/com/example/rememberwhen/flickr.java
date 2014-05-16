@@ -20,6 +20,11 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,6 +39,7 @@ public class flickr extends AsyncTask<String, String, String> {
     private static Activity activity;
     private static Bitmap [] flickrImage;
     private static List<String>locations;
+    private static List<Date>dates;
     private static List<Card> bundle;
 
     public flickr(ImageView imv,TextView tv,HashMap<String, String> data, Activity act) {
@@ -87,6 +93,7 @@ public class flickr extends AsyncTask<String, String, String> {
                 if(!data.get("stat").toString().equals("fail"))
                     getAllPhotos((JSONArray)((JSONObject) data.get("photos")).get("photo"));
                     get_all_geocode((JSONArray)((JSONObject) data.get("photos")).get("photo"));
+                    get_all_dates((JSONArray)((JSONObject) data.get("photos")).get("photo"));
                     //get_geocode("2929406868");
                     //flickrImage = get_photo((JSONObject) ((JSONArray) ((JSONObject) data.get("photos")).get("photo")).get(1));
                 //Log.w("flickr", data.toString());
@@ -98,6 +105,46 @@ public class flickr extends AsyncTask<String, String, String> {
         }
         //return ;
         return "failed to get GPS coordinates";
+    }
+
+
+    public static void get_all_dates(JSONArray metadata){
+        dates = new ArrayList<Date>();
+        for(int i=0;i<metadata.length();i++)
+            try {
+                //(JSONObject)metadata.get(i)
+                JSONObject data = (JSONObject)metadata.get(i);
+                dates.add(get_date(data.get("id") + ""));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+    }
+
+    public static Date get_date(String photo_id){
+        DateFormat df = new SimpleDateFormat("y-M-d k:m:s");
+        String url = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo"+
+                "&api_key="+ api_key +
+                "&photo_id="+ photo_id+
+                "&format=json&nojsoncallback=1";
+        JSONObject json = null;
+        try {
+            json = readJsonFromUrl(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONObject dat = null;
+        try {
+            dat = (((JSONObject)((JSONObject)json.get("photo")).get("dates")));
+            return df.parse((String) dat.get("taken"));
+        } catch (JSONException e) {
+            Log.w("flickr", e);
+        } catch (ParseException e) {
+            Log.w("flickr", e);
+        }
+        return null;
+
     }
 
     public static void get_all_geocode(JSONArray metadata){
@@ -223,15 +270,16 @@ public class flickr extends AsyncTask<String, String, String> {
 
     public static void createCards(){
         for (int i=0;i<flickrImage.length;i++){
-            createCard(flickrImage[i]);
+            createCard(flickrImage[i],dates.get(i));
         }
     }
 
-    public static void createCard(Bitmap b){
+    public static void createCard(Bitmap b, Date taken_date){
+        java.text.DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         Card card;
         card = new Card(activity);
-        card.setText("Test");
-        card.setFootnote("Aren't they precious?");
+//        card.setText("Memory");
+        card.setFootnote(df.format(taken_date));
         card.setImageLayout(Card.ImageLayout.FULL);
         card.addImage(b);
         bundle.add(card);
