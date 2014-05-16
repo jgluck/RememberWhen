@@ -148,11 +148,11 @@ public class RememberCameraActivity extends Activity{
             Location loc = GPSDebugActivity.getLastLocation(this);
             data.put("lat", loc.getLatitude()+"");
             data.put("lon",loc.getLongitude()+"");
-            ImageView myImage = (ImageView) findViewById(R.id.photoResult);
-            TextView myText = (TextView) findViewById(R.id.photo_view_loading_text);
+            //ImageView myImage = (ImageView) findViewById(R.id.photoResult);
+            //TextView myText = (TextView) findViewById(R.id.photo_view_loading_text);
             //oauthTEST();
             //sendEmail(pictureFile);
-            new AsyncMailer(ImageHandler.loadPic(pictureFile),this).execute();
+            new AsyncMailer(picturePath,data, ImageHandler.loadPic(pictureFile),this).execute();
 
             //finish();
 	    } else {
