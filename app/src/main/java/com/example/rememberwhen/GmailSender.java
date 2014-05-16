@@ -1,23 +1,33 @@
 package com.example.rememberwhen;
 
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.os.Environment;
 import android.util.Log;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.Security;
 import java.util.Properties;
 
-public class GmailSender extends javax.mail.Authenticator {
+public class GmailSender extends javax.mail.Authenticator{
     private String mailhost = "smtp.gmail.com";
     private String user;
     private String password;
@@ -49,13 +59,34 @@ public class GmailSender extends javax.mail.Authenticator {
         return new PasswordAuthentication(user, password);
     }
 
-    public synchronized void sendMail(String subject, String body, String sender, String recipients) throws Exception {
+    public synchronized void sendMail(String subject, String body, String sender, String recipients, Bitmap b) throws Exception {
         try{
             MimeMessage message = new MimeMessage(session);
             DataHandler handler = new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/plain"));
             message.setSender(new InternetAddress(sender));
             message.setSubject(subject);
             message.setDataHandler(handler);
+
+            //3) create MimeBodyPart object and set your message content
+            BodyPart messageBodyPart1 = new MimeBodyPart();
+            messageBodyPart1.setText("How is This");
+            //4) create new MimeBodyPart object and set DataHandler object to this object
+            MimeBodyPart messageBodyPart2 = new MimeBodyPart();
+            //Location of file to be attached
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            b.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            DataSource source = new ByteArrayDataSource(byteArray, "image/png");
+            messageBodyPart2.setDataHandler(new DataHandler(source));
+            messageBodyPart2.setFileName("glass.jpg");
+            //5) create Multipart object and add MimeBodyPart objects to this object
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart1);
+            multipart.addBodyPart(messageBodyPart2);
+            //6) set the multiplart object to the message object
+            message.setContent(multipart );
+
             if (recipients.indexOf(',') > 0)
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients));
             else

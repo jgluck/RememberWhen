@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.FileObserver;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -153,15 +152,7 @@ public class RememberCameraActivity extends Activity{
             TextView myText = (TextView) findViewById(R.id.photo_view_loading_text);
             //oauthTEST();
             //sendEmail(pictureFile);
-            try {
-                GmailSender sender = new GmailSender("glassUMD@gmail.com", "thisisthehcil");
-                sender.sendMail("This is Subject",
-                        "This is Body",
-                        "glassUMD@gmail.com",
-                        "kentwills@aol.com");
-            } catch (Exception e) {
-                Log.e("SendMail", e.getMessage(), e);
-            }
+            new AsyncMailer(ImageHandler.loadPic(pictureFile),this).execute();
 
             //finish();
 	    } else {
@@ -308,24 +299,6 @@ public class RememberCameraActivity extends Activity{
         editor.commit();
     }
 
-    private void sendEmail(File pictureFile){
-        Uri uri = Uri.fromFile(pictureFile);
-        Date dt = new Date();
 
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("text/plain");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"r.kentwills@yahoo.com", "myself74types@photos.flickr.com"});
-        //i.putExtra(Intent.EXTRA_SUBJECT, "");
-        i.putExtra(Intent.EXTRA_STREAM, uri);
-        try {
-            Log.d("Msg","Trying to send mail");
-            startActivity(Intent.createChooser(i,"pick"));
-        } catch (android.content.ActivityNotFoundException ex) {
-            Log.e("ERR", "Error " + ex.toString());
-            Toast.makeText(RememberCameraActivity.this,
-                    "There are no email clients installed.",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
 	
 }
