@@ -23,8 +23,8 @@
 
     <ImageView
         android:id="@+id/photoResult"
-        android:layout_width="268dp"
-        android:layout_height="121dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="left|bottom" />
 
     <TextView

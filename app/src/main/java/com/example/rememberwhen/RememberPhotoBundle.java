@@ -92,7 +92,7 @@ public class RememberPhotoBundle extends Activity {
         Card card;
 
         card = new Card(this);
-        card.setText("These are your memories");
+        card.setText("\n\nThese are your memories");
         mCards.add(card);
 /*
         card = new Card(this);
