@@ -2,13 +2,11 @@ package com.example.rememberwhen;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,9 +25,7 @@ public class RememberPhotoBundle extends Activity {
 
 
     SharedPreferences prefs;
-    SharedPreferences.Editor pref_editor;
     private List<Card> mCards;
-    private List<String> mCardLocations;
     private CardScrollView mCardScrollView;
 
 
@@ -45,46 +41,28 @@ public class RememberPhotoBundle extends Activity {
         super.onCreate(savedInstanceState);
         prefs = this.getSharedPreferences(
                 "com.example.rememberwhen", Context.MODE_PRIVATE);
-        pref_editor = prefs.edit();
-
         createCards();
 
         mCardScrollView = new CardScrollView(this);
         ExampleCardScrollAdapter adapter = new ExampleCardScrollAdapter();
         mCardScrollView.setAdapter(adapter);
-        mCardScrollView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position,
-                                    long arg3)
-            {
-                pref_editor.putString("current_photo_loc",mCardLocations.get(position));
-                spawnMenu();
-            }
-        });
         mCardScrollView.activate();
         setContentView(mCardScrollView);
 
     }
 
 
-    private void spawnMenu(){
-        Intent menuIntent = new Intent(this, PhotoLocMenu.class);
-        startActivity(menuIntent);
-    }
-
     private void createCards() {
         HashMap<String, String> data = new HashMap<String, String>();
         Location loc = GPSDebugActivity.getLastLocation(this);
         data.put("lat", loc.getLatitude()+"");
-        data.put("lon", loc.getLongitude() + "");
+        data.put("lon",loc.getLongitude()+"");
         ImageView myImage = (ImageView) findViewById(R.id.photoResult);
         TextView myText = (TextView) findViewById(R.id.photo_view_loading_text);
 
         mCards = new ArrayList<Card>();
-        mCardLocations = new ArrayList<String>();
 
-        new flickr(mCards, mCardLocations, data, this).execute();
+        new flickr(mCards, data, this).execute();
 
 
 

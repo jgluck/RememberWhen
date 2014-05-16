@@ -12,8 +12,9 @@ public final class R {
     }
     public static final class color {
         public static final int black=0x7f050000;
-        public static final int dark_violet=0x7f050001;
-        public static final int light_gray=0x7f050002;
+        public static final int dark_dark_dark=0x7f050001;
+        public static final int dark_violet=0x7f050002;
+        public static final int light_gray=0x7f050003;
     }
     public static final class dimen {
         public static final int activity_horizontal_margin=0x7f060000;

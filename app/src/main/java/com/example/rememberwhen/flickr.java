@@ -1,18 +1,15 @@
 package com.example.rememberwhen;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapRegionDecoder;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.glass.app.Card;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,8 +18,14 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 /**
  * Created by kentwills on 5/13/14.
@@ -192,14 +195,6 @@ public class flickr extends AsyncTask<String, String, String> {
         card.setImageLayout(Card.ImageLayout.FULL);
         card.addImage(b);
         bundle.add(card);
-    }
-
-    public static SharedPreferences.Editor putDouble(final SharedPreferences.Editor edit, final String key, final double value) {
-        return edit.putLong(key, Double.doubleToRawLongBits(value));
-    }
-
-    public static double getDouble(final SharedPreferences prefs, final String key, final double defaultValue) {
-        return Double.longBitsToDouble(prefs.getLong(key, Double.doubleToLongBits(defaultValue)));
     }
 
 }

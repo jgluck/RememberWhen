@@ -24,7 +24,6 @@ import com.example.rememberwhen.OAuth.tasks.GetOAuthTokenTask;
 import com.example.rememberwhen.OAuth.tasks.LoadPhotostreamTask;
 import com.example.rememberwhen.OAuth.tasks.LoadUserTask;
 import com.example.rememberwhen.OAuth.tasks.OAuthTask;
-import com.example.rememberwhen.R;
 import com.googlecode.flickrjandroid.oauth.OAuth;
 import com.googlecode.flickrjandroid.oauth.OAuthToken;
 import com.googlecode.flickrjandroid.people.User;
